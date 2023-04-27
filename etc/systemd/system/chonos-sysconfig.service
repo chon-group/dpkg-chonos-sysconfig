@@ -1,0 +1,13 @@
+[Unit]
+Description=ChonOS Sysconfig
+After=network.target
+
+[Service]
+ExecStart=/bin/sh /opt/chonos-embMAS/lib/tomcat/bin/catalina.sh run
+ExecStop=/bin/sh /opt/chonos-embMAS/lib/tomcat/bin/catalina.sh stop
+User=root
+WorkingDirectory=/root
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
