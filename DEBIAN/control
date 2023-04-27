@@ -3,8 +3,8 @@ Version: 1.0.0
 Priority:
 Architecture: all
 Essential:
-Depends: chonos-firmwaremng (>=1.0.0), chonos-embeddedmas (>=1.0.1), chonos-cert
-Pre-depends:
+Depends: chonos-firmwaremng (>=1.0.0), chonos-embeddedmas (>=1.0.1), chonos-log (>=1.0.0)
+Pre-depends: chonos-cert (>=23.04.19)
 Suggests:
 Installed-Size:
 Maintainer: chon@grupo.cefet-rj.br
