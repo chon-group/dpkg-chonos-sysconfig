@@ -4,8 +4,5 @@ cat /etc/rc.local | grep -v "exit 0" | grep -v "chonosSysConf" | grep -v "/bin/s
 
 echo "exit 0" >> /tmp/rc.local
 cat /tmp/rc.local > /etc/rc.local
-chmod +x /etc/rc.local
+#chmod +x /etc/rc.local
 
-systemctl daemon-reload
-systemctl enable chonos-sysconfig.service
-systemctl start chonos-sysconfig.service
