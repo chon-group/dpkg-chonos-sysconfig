@@ -1,1 +1,6 @@
-{"projects":{"1":"firstProject"}}
+{
+	"projects": {
+		"1": "helloAgent",
+		"2": "blink"
+	}
+}

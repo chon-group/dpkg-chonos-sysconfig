@@ -1,0 +1,13 @@
+{
+	"id": 2,
+	"name": "blink",
+	"agents": [{
+		"archClass": "Argo",
+		"name": "bane",
+		"sourceCode": "/* Initial beliefs and rules */\nserialPort(ttyACM0).\n\n/* Initial goals */\n\n!start.\n\n/* Plans */\n\n+!start:\nserialPort(Port) <- \n\t.print(\"Ah, Mr. Anderson, I see you are as predictable in this world as you are in the other.\");\n\t.port(Port);\n\t.percepts(open);\n\t.limit(1000).\n\n+ledStatus(on) <-\n\t.print(\"Turning ON  the Led in Arduino!\");\n\t.act(ledOff).\n\n+ledStatus(off) <-\n\t.print(\"Turning OFF the Led in Arduino!\");\n\t.act(ledOn).\n\n+port(Port,Status):\nStatus = off | Status = timeout <-\n\t.percepts(close);\n\t.print(\"It's not over, Mr. Anderson! It's not over!\").\n"
+	}],
+	"firmwares": [{
+		"name": "blink",
+		"sourceCode": "#include <Javino.h>\nJavino javino;\n\nvoid serialEvent(){\n /*\n * The serialEvent() function handles interruptions coming from the serial port.\n * \n * NOTE: The serialEvent() feature is not available on the Leonardo, Micro, or other ATmega32U4 based boards. \n * https://docs.arduino.cc/built-in-examples/communication/SerialEvent \n * \n */\n  javino.readSerial();\n}\n\nvoid setup() {\n javino.start(9600);\n pinMode(13,OUTPUT);\n}\n\nvoid loop() {\n if(javino.availableMsg()){\n  if(javino.getMsg() == \"getPercepts\")javino.sendMsg(getPercepts());\n  else if(javino.getMsg() == \"ledOn\") ledOn();\n  else if(javino.getMsg() == \"ledOff\")ledOff();\n }\n}\n\n/* It sends the exogenous environment's perceptions to the agent. */\nString getPercepts(){\n  String beliefs = \n    \"resourceName(myArduino);\"+\n    getLedStatus(); \n            \n  return beliefs;\n}\n\nString getLedStatus(){\n  if(digitalRead(13)==1) return \"ledStatus(on);\";\n  else return \"ledStatus(off);\";\n}\n\n/* It implements the command to be executed in the exogenous environment. \n*\n* NOTE: Every command must reflect in a function. \n*\n*/\nvoid ledOn(){\n  digitalWrite(13,HIGH); \n}\n\n/* It implements the command to be executed in the exogenous environment. */\nvoid ledOff(){\n  digitalWrite(13,LOW); \n}"
+	}]
+}

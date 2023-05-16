@@ -1,0 +1,10 @@
+{
+	"id": 1,
+	"name": "helloAgent",
+	"agents": [{
+		"archClass": "Jason",
+		"name": "smith",
+		"sourceCode": "/* Initial beliefs and rules */\n\n\n/* Initial goals */\n\n!start.\n\n/* Plans */\n\n+!start \n<- \n\t.print(\"Never Send A Human To Do A Machine's Job!\")."
+	}],
+	"firmwares": []
+}
