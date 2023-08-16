@@ -4,5 +4,27 @@ cat /etc/rc.local | grep -v "exit 0" | grep -v "chonosSysConf" | grep -v "/bin/s
 
 echo "exit 0" >> /tmp/rc.local
 cat /tmp/rc.local > /etc/rc.local
-#chmod +x /etc/rc.local
+chmod +x /etc/rc.local
 
+##### Listando Projetos
+# Diretório a ser listado
+diretorio="/root/chonide/Projects/"
+# Lista os subdiretórios no diretório especificado
+subdiretorios=($(ls -d "$diretorio"/*/))
+# Inicializa um contador
+contador=1
+# Inicializa a string JSON
+json_data="{\n  \"projects\": {\n"
+
+# Loop através dos subdiretórios
+for subdiretorio in "${subdiretorios[@]}"; do
+    projeto=$(basename "$subdiretorio")
+    json_data+="    \"$contador\": \"$projeto\",\n"
+    contador=$((contador + 1))
+done
+
+# Remove a última vírgula e fecha o JSON
+json_data=${json_data%,*}
+json_data+="\n  }\n}"
+# Escreve o JSON 
+echo -e "$json_data" > /root/chonide/Projects/projects.json
