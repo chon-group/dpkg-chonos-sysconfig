@@ -1,6 +1,7 @@
 {
 	"projects": {
 		"1": "helloAgent",
-		"2": "blink"
+		"2": "blink",
+		"3": "skyNet"
 	}
 }
