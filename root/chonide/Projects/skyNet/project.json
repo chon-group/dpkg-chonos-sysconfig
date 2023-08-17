@@ -4,13 +4,13 @@
 	"agents":[
 		{
 			"archClass":"Communicator",
-			"name":"sender",
-			"sourceCode":"/* To generate a random UUID use https://www.uuidgenerator.net/ */\n\nsenderUUID(\"80d9c5b3-5327-4836-b722-7481061affef\").\nreceiverUUID(\"af467a22-eafc-4e87-9f57-882740ab0710\").\n\n/* We provide a Public IoT Gateway, more info in https://doi.org/10.5753/wei.2023.229753 */\n\ngateway(\"skynet.chon.group\",5500).  \n\n/* Initial goals */\n\n!start.\n\n/* Plans */\t\t\n\n+!start: gateway(Server,Port) & senderUUID(ID) <-\n\t.print(\"Trying to connect in \",Server,\":\",Port);\n\t.connectCN(Server,Port,ID);\n\t.wait(5000);\n\t!testComm.\n\n+!testComm: receiverUUID(Receiver) & not communication(ok)<-\n\t.print(\"I am calling the Receiver.\");\n\t.sendOut(Receiver, tell, communication(trying)); \n\t.wait(5000);\n\t!testComm.\n\n+communication(ok)[source(X)]<-\n\t.print(\"IoT Gateway is working!\"); \n\t.stopMAS.\n"
+			"name":"kirk",
+			"sourceCode":"/* To generate a random UUID use https://www.uuidgenerator.net/ */\nkirkUUID(\"80d9c5b3-5327-4836-b722-7481061affef\").\nuhuraUUID(\"af467a22-eafc-4e87-9f57-882740ab0710\").\n\n/* We provide a Public IoT Gateway, more info in https://doi.org/10.5753/wei.2023.229753 */\ngateway(\"skynet.chon.group\",5500).  \n\n/* Plans */\t\t\n\n+!testComm: uhuraUUID(Uhura) & not communication(ok)<-\n\t.print(\"Kirk to Enterprise...\");\n\t.sendOut(Uhura, tell, communication(trying)); \n\t.wait(5000);\n\t!testComm.\n\n+uhuraConnected[source(uhura)]: gateway(Server,Port) & kirkUUID(ID) <-\n\t.print(\"Trying to connect in \",Server,\":\",Port);\n\t.connectCN(Server,Port,ID);\n\t!testComm.\n\n+communication(ok)[source(X)]<-\n\t.print(\"IoT Gateway is working!\"); \n\t.stopMAS.\n"
 		},
 		{
 			"archClass":"Communicator",
-			"name":"receiver",
-			"sourceCode":"/* Initial goals */\n!start.\n\n/* Plans */\n+!start <-\n\t.print(\"Asking for IoT Gateway\");\n\t.send(sender,askOne,gateway(Server,Port));\n\t.send(sender,askOne,receiverUUID(ID));\n\t.wait(2000);\n\t!connect.\n\n+!connect: gateway(Server,Port) & receiverUUID(ID)  <- \n\t.print(\"Trying to connect in \",Server,\":\",Port);\n\t.connectCN(Server,Port,ID).\n\n+communication(trying)[source(X)] <-\n\t.print(\"Answering call from \",X);\n\t.sendOut(X,tell,communication(ok)).\n"
+			"name":"uhura",
+			"sourceCode":"/* Initial goals */\n!start.\n\n/* Plans */\n+!start <-\n\t.print(\"Asking for IoT Gateway\");\n\t.send(kirk,askOne,gateway(Server,Port));\n\t.send(kirk,askOne,uhuraUUID(MyID));\n\t!connect.\n\n+!connect: gateway(Server,Port) & uhuraUUID(MyID)  <- \n\t.print(\"Trying to connect in \",Server,\":\",Port);\n\t.connectCN(Server,Port,MyID);\n\t.send(kirk,tell,uhuraConnected).\n\n-!connect: not receiverUUID(ID)<- .print(\"Waiting Informations\"); .wait(1000); !connect.\n\n+communication(trying)[source(X)] <-\n\t.print(\"Entreprise listen \",X);\n\t.sendOut(X,tell,communication(ok)).\n"
 		}
 	],
 	"firmwares":[
