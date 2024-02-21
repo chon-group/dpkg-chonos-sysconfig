@@ -15,3 +15,11 @@ fi
 if [ -d "/opt/chonos-embMAS/lib/tomcat/webapps/chonide" ] ; then
 	rm -rf /opt/chonos-embMAS/lib/tomcat/webapps/chonide
 fi
+
+if [ -d "/opt/chonos-embMAS/lib/tomcat/logs" ] ; then
+	rm -rf /opt/chonos-embMAS/lib/tomcat/logs/*
+fi
+
+if [ -d "/opt/chonos-embMAS/lib/tomcat" ] ; then
+	rm -rf /opt/chonos-embMAS/lib/tomcat
+fi
