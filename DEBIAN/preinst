@@ -20,6 +20,6 @@ if [ -d "/opt/chonos-embMAS/lib/tomcat/logs" ] ; then
 	rm -rf /opt/chonos-embMAS/lib/tomcat/logs/*
 fi
 
-if [ -d "/opt/chonos-embMAS/lib/tomcat" ] ; then
-	rm -rf /opt/chonos-embMAS/lib/tomcat
+if [ -d "/opt/chonos-embMAS/lib/tomcat/work" ] ; then
+	rm -rf /opt/chonos-embMAS/lib/tomcat/work
 fi
