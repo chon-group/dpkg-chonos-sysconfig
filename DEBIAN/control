@@ -1,10 +1,10 @@
 Package: chonos-sysconfig
-Version: 1.4.2
+Version: 1.4.3
 Priority:
 Architecture: all
 Essential:
-Depends: chonos-firmwaremng (>=1.5.2), chonos-embeddedmas (>=1.1.0), chonos-log (>=1.4)
-Pre-depends: sudo, chonos-cert (>=23.12.17)
+Depends: chonos-log, chonos-task
+Pre-depends: sudo, chonos-cert
 Suggests:
 Installed-Size:
 Maintainer: chon@grupo.cefet-rj.br
