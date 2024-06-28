@@ -1,10 +1,4 @@
 #!/bin/bash
-echo "#! /bin/sh" > /tmp/rc.local
-cat /etc/rc.local | grep -v "exit 0" | grep -v "chonosSysConf" | grep -v "/bin/sh" >> /tmp/rc.local
-
-echo "exit 0" >> /tmp/rc.local
-cat /tmp/rc.local > /etc/rc.local
-chmod +x /etc/rc.local
 
 ##### Listando Projetos
 # Diretório a ser listado
