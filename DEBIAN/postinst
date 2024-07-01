@@ -22,3 +22,10 @@ json_data=${json_data%,*}
 json_data+="\n  }\n}"
 # Escreve o JSON 
 echo -e "$json_data" > /root/chonide/Projects/projects.json
+
+
+systemctl enable chonos-sysconfig.service
+if [ -d /run/systemd/system ]; then
+    systemctl daemon-reload
+    systemctl start chonos-sysconfig.service
+fi

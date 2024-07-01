@@ -1,0 +1,5 @@
+#!/bin/bash
+if [ -d /run/systemd/system ]; then
+    systemctl stop chonos-sysconfig.service
+fi
+systemctl disable chonos-sysconfig.service
