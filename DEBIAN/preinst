@@ -1,4 +1,12 @@
 #!/bin/bash
-if [ -d "/opt/group.chon/lib/tomcat" ] ; then
-	rm -rf /opt/group.chon/lib/tomcat
+if [ -d "/opt/group.chon/lib/tomcat/webapps/chonide" ] ; then
+	rm -rf /opt/group.chon/lib/tomcat/webapps/chonide
+fi
+
+if [ -d "/opt/group.chon/lib/tomcat/logs" ] ; then
+	rm -rf /opt/group.chon/lib/tomcat/logs/*
+fi
+
+if [ -d "/opt/group.chon/lib/tomcat/work" ] ; then
+	rm -rf /opt/group.chon/lib/tomcat/work
 fi
