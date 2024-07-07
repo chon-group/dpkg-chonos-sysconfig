@@ -1,9 +1,9 @@
 Package: chonos-sysconfig
-Version: 1.4.7
+Version: 1.4.8
 Priority:
 Architecture: all
 Essential:
-Depends: chonos-log, chonos-task
+Depends: temurin-17-jre | openjdk-17-jre, chonos-log, chonos-task
 Pre-depends: sudo, chonos-cert(>= 24.07.02)
 Suggests:
 Installed-Size:
