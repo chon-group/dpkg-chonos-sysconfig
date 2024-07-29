@@ -1,0 +1,14 @@
+{
+	"id":4,
+	"name":"velluscinumExample",
+	"agents":[
+		{
+			"archClass":"Jason",
+			"name":"bob",
+			"sourceCode":"/* Initial beliefs and rules */\nbigchainDB(\"http://testchain.chon.group:9984/\").\naliceKey(\"FNJPJdtuPQYsqHG6tuUjKjqv7SW84U4ipiyyLV2j6MEW\").\n\n/* Initial goals */\n!start.\n\n/* Plans */\n+!start <-\n\t.print(\"Creating a Wallet\");\n\t.velluscinum.buildWallet(myWallet);\n\t.wait(myWallet(PrivateKey,PublicKey));\n\t\n\t.print(\"Creating a NFT\");\n\t?bigchainDB(Server);\n\t.velluscinum.deployNFT(Server,\n\t\t\tPrivateKey,PublicKey,\n\t\t\t\"name:Meninas;author:Silva y Velázquez;place:Madrid;year:1656\",\n\t\t\t\"location:Madrid;value_eur:25000000;owner:Bob Agent\",\n\t\t\tmyNFT);\n\n\t.wait(myNFT(AssetID));\n\t.print(\"NFT registered: \",Server,\"api/v1/transactions/\",AssetID);\n\n\t.print(\"Tranfering the NFT\");\n\t?aliceKey(AliceKey);\n\t.velluscinum.transferNFT(Server,\n\t\t\tPrivateKey,PublicKey,\n\t\t\tAssetID,\n\t\t\tAliceKey,\n\t\t\t\"value_eur:30000000;owner:Alice;location:Rio de Janeiro\",\n\t\t\ttransactionTo(alice));\n\t\t\t\t\n\t.wait(transactionTo(alice,TransferID));\n\t.print(\"NFT transferred: \",Server,\"api/v1/transactions/\",TransferID);\n\t.wait(5000);\n\t.stopMAS."
+		}
+	],
+	"firmwares":[
+		
+	]
+}
