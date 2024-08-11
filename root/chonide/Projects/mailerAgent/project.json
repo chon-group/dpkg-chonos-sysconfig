@@ -1,0 +1,19 @@
+{
+	"id":5,
+	"name":"mailerAgent",
+	"agents":[
+		{
+			"archClass":"jason.Mailer",
+			"name":"alice",
+			"sourceCode":"// Agent alice in project testingMailerArch\n/* Initial beliefs and rules */\n\n/*  To use GMX.com MAIL, please create TWO e-mail accounts in (https://www.gmx.com/mail/) */ \n//aliceEmailAndPass(\"PUT-HERE-THE-ALICE-MAIL@gmx.com\",\"PUT-HERE-THE-ALICE-PASS\").\n//bobEmailAndPass(\"PUT-HERE-THE-BOB-MAIL@gmx.com\",\"PUT-HERE-THE-BOB-PASS\").\n//emailProviderSettings([\"imap.gmx.com\",imaps],[\"mail.gmx.com\",smtpOverTLS]).\n\n\n/*  To use GMail, you need to configure the APP PASSWORD.\n    See more in https://myaccount.google.com/apppasswords\n    Also you need enable IMAP conection\n    See more in https://mail.google.com/mail/u/0/#settings/fwdandpop\n    Informations in https://support.google.com/accounts/answer/185833\n*/\n//aliceEmailAndPass(\"PUT-HERE-THE-ALICE-MAIL@gmail.com\",\"PUT-HERE-ALICE-APP-PASSWORD\").\n//bobEmailAndPass(\"PUT-HERE-THE-BOB-MAIL@gmail.com\",\"PUT-HERE-BOB-APP-PASSWORD\").\n//emailProviderSettings([\"imap.gmail.com\",imaps],[\"smtp.gmail.com\",smtpOverTLS]).\n\n\n/*  To use YahooMail, you need to configure the APP PASSWORD.\n    Informations in https://help.yahoo.com/kb/SLN15241.html\n    See more in https://login.yahoo.com/myaccount/security/app-password/\n*/\n//aliceEmailAndPass(\"PUT-HERE-THE-ALICE-MAIL@yahoo.com\",\"PUT-HERE-ALICE-APP-PASSWORD\").\n//bobEmailAndPass(\"PUT-HERE-THE-BOB-MAIL@yahoo.com\",\"PUT-HERE-BOB-APP-PASSWORD\").\n//emailProviderSettings([\"imap.mail.yahoo.com\",imaps],[\"smtp.mail.yahoo.com\",smtpOverTLS]).\n\n\n/*  To use FastMail service, you need to configure the APP PASSWORD. \n    See more in https://app.fastmail.com/settings/security/integrations \n*/\n//aliceEmailAndPass(\"PUT-HERE-THE-ALICE-MAIL@fastmail.com\",\"PUT-HERE-ALICE-APP-PASSWORD\").\n//bobEmailAndPass(\"PUT-HERE-THE-BOB-MAIL@fastmail.com\",\"PUT-HERE-BOB-APP-PASSWORD\").\n//emailProviderSettings([\"imap.fastmail.com\",imaps],[\"smtp.fastmail.com\",smtpOverTLS]).\n\n\n/* Initial goals */\n!start.\n\n/* Plans */\n+!start: aliceEmailAndPass(AliceEMail,AlicePass) & emailProviderSettings(Receiving,Sending) <- \n    .print(\"Configuring my Email!\");\n    .mailer.credentials(AliceEMail,AlicePass);\n    .mailer.eMailService(Receiving,Sending);\n\n    .print(\"Requesting an email from bob\");\n    ?bobEmailAndPass(BobEMail,BobPass);\n    .send(bob,achieve,configEmail(BobEMail,BobPass,Receiving,Sending));\n    .send(bob,achieve,sendAnTestEMailTo(AliceEMail));\n.\n\n-!start <- .print(\"Something is wrong! Consult tutorial at: https://github.com/chon-group/Mailer/wiki\").\n\n+ping(Nr)[source(EmailAddress)]:Nr > 1 <- .print(\"The e-mail Middleware is working!\"); .stopMAS.\n\n+ping(Nr)[source(EmailAddress)]<-\n    .print(\"Received ping=\",Nr,\" from: \",EmailAddress);\n    .mailer.sendEMail(EmailAddress,tell,ping(Nr+1))\n.\n\n-ping(Nr)[source(EmailAddress)] <- .stopMAS."
+		},
+		{
+			"archClass":"jason.Mailer",
+			"name":"bob",
+			"sourceCode":"// Agent bob in project testingMailerArch\n\n/* Plans */\n+!sendAnTestEMailTo(Dest) <-\n    .print(\"Sending e-mail to:\",Dest);\n    .mailer.sendEMail(Dest,tell,ping(0));\n.\n\n-!sendAnTestEMailTo(Dest) <- .stopMAS.\n\n+!configEmail(Email,Pass,ReceivingConf,SendingConf) <-\n    .print(\"Configuring my Email!\");\n    .mailer.credentials(Email,Pass);\n    .mailer.eMailService(ReceivingConf,SendingConf);\n.\n\n+ping(Nr)[source(EmailAddress)]<-\n    .print(\"Received ping=\",Nr,\" from: \",EmailAddress);\n    .mailer.sendEMail(EmailAddress,tell,ping(Nr+1))\n.\n\n-ping(Nr)[source(EmailAddress)] <- .stopMAS."
+		}
+	],
+	"firmwares":[
+		
+	]
+}
