@@ -1,10 +1,10 @@
 Package: chonos-sysconfig
-Version: 2.0.1
+Version: 25.11.19
 Priority:
 Architecture: all
 Essential:
-Depends: openjdk-17-jre | temurin-17-jre , chonos-log (>= 1.5.8), chonos-task (>= 1.1.2)
-Pre-depends: sudo, chonos-cert(>= 25.02.24)
+Depends: chonos-log (>= 25.11.19), chonos-task (>= 1.1.2), chonos-cert(>= 25.09.29)
+Pre-depends: sudo, openjdk-21-jre-headless | openjdk-21-jre | temurin-21-jre | bellsoft-java21-lite | temurin-17-jre | openjdk-17-jre 
 Suggests:
 Installed-Size:
 Maintainer: chon@grupo.cefet-rj.br
