@@ -1,6 +1,6 @@
 # ChonOS SysConfig
 
-![chonos-sysconfig](https://github.com/chon-group/dpkg-chonos-sysconfig/assets/32855001/e340b291-511a-40e2-9af8-9b8891346578)
+|<img width="502" height="523" alt="capa" src="https://github.com/user-attachments/assets/418a0caf-fef7-477d-a0b1-42c0f65698ba" />|
 |:--:|
 |ChonOS-SysConfig provides a web interface that allows complete remote management. So, the designer can give the device a name, arrange the network configurations, and manage the reasoning and firmware layers remotely, eliminating the need for a keyboard, mouse, or screen to deal with the embedded system.|
 
